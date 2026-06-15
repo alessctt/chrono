@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title">
+            Gestión de Usuarios
+        </h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        placeholder="Nombre completo"
+                        required>
+                </div>
+
+                <div class="col-md-3">
+                    <input
+                        type="email"
+                        name="correo"
+                        class="form-control"
+                        placeholder="Correo institucional"
+                        required>
+                </div>
+
+                <div class="col-md-2">
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Contraseña"
+                        required>
+                </div>
+
+                <div class="col-md-2">
+
+                    <select
+                        name="rol"
+                        class="form-control">
+
+                        {% for rol in roles %}
+
+                        <option value="{{ rol[0] }}">
+                            {{ rol[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <select
+                        name="activo"
+                        class="form-control">
+
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <hr>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for usuario in usuarios %}
+
+                <tr>
+
+                    <td>{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                    <td>{{ usuario[2] }}</td>
+                    <td>{{ usuario[3] }}</td>
+
+                    <td>
+
+                        {% if usuario[4] == 1 %}
+                            Activo
+                        {% else %}
+                            Inactivo
+                        {% endif %}
+
+                    </td>
+                    <td>
+
+                        <a href="/editar_usuario/{{ usuario[0] }}" class="btn btn-warning btn-sm">                          
+                            Editar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

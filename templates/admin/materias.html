@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+            Gestión de Materias
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-2">
+
+                    <input
+                        type="text"
+                        name="clave"
+                        class="form-control"
+                        placeholder="Clave"
+                        required>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        placeholder="Nombre de la materia"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <input
+                        type="number"
+                        name="horas_teoricas"
+                        class="form-control"
+                        placeholder="Horas T">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <input
+                        type="number"
+                        name="horas_practicas"
+                        class="form-control"
+                        placeholder="Horas P">
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <input
+                        type="number"
+                        name="semestre"
+                        class="form-control"
+                        placeholder="Sem">
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <hr>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Clave</th>
+                    <th>Materia</th>
+                    <th>HT</th>
+                    <th>HP</th>
+                    <th>Semestre</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for materia in materias %}
+
+                <tr>
+
+                    <td>{{ materia[0] }}</td>
+                    <td>{{ materia[1] }}</td>
+                    <td>{{ materia[2] }}</td>
+                    <td>{{ materia[3] }}</td>
+                    <td>{{ materia[4] }}</td>
+                    <td>{{ materia[5] }}</td>
+
+                    <td>
+
+                        <a
+                            href="/editar_materia/{{ materia[0] }}"
+                            class="btn btn-warning btn-sm">
+
+                            Editar
+
+                        </a>
+
+                        <a
+                            href="/eliminar_materia/{{ materia[0] }}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿Desea eliminar esta materia?')">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

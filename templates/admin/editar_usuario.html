@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3>Editar Usuario</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Nombre</label>
+
+                <input
+                    type="text"
+                    name="nombre"
+                    value="{{ usuario[1] }}"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Correo</label>
+
+                <input
+                    type="email"
+                    name="correo"
+                    value="{{ usuario[2] }}"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Estado</label>
+
+                <select
+                    name="activo"
+                    class="form-control">
+
+                    <option value="1"
+                    {% if usuario[4] == 1 %}
+                    selected
+                    {% endif %}
+                    >
+                        Activo
+                    </option>
+
+                    <option value="0"
+                    {% if usuario[4] == 0 %}
+                    selected
+                    {% endif %}
+                    >
+                        Inactivo
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button class="btn btn-success">
+
+                Guardar Cambios
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

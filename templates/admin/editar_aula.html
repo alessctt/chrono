@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3>Editar Aula</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Edificio</label>
+
+                <input
+                    type="text"
+                    name="edificio"
+                    value="{{ aula[1] }}"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Aula</label>
+
+                <input
+                    type="text"
+                    name="aula"
+                    value="{{ aula[2] }}"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Capacidad</label>
+
+                <input
+                    type="number"
+                    name="capacidad"
+                    value="{{ aula[3] }}"
+                    class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Tipo</label>
+
+                <select
+                    name="tipo"
+                    class="form-control">
+
+                    <option
+                    {% if aula[4] == 'Aula' %}
+                    selected
+                    {% endif %}
+                    >
+                    Aula
+                    </option>
+
+                    <option
+                    {% if aula[4] == 'Laboratorio' %}
+                    selected
+                    {% endif %}
+                    >
+                    Laboratorio
+                    </option>
+
+                    <option
+                    {% if aula[4] == 'Auditorio' %}
+                    selected
+                    {% endif %}
+                    >
+                    Auditorio
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button class="btn btn-success">
+
+                Guardar Cambios
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

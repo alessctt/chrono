@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title">
+            Gestión de Aulas
+        </h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <input
+                        type="text"
+                        name="edificio"
+                        class="form-control"
+                        placeholder="Edificio"
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <input
+                        type="text"
+                        name="aula"
+                        class="form-control"
+                        placeholder="Aula"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <input
+                        type="number"
+                        name="capacidad"
+                        class="form-control"
+                        placeholder="Capacidad"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <select
+                        name="tipo"
+                        class="form-control">
+
+                        <option>Aula</option>
+                        <option>Laboratorio</option>
+                        <option>Auditorio</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        class="btn btn-success">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <hr>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Edificio</th>
+                    <th>Aula</th>
+                    <th>Capacidad</th>
+                    <th>Tipo</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for aula in aulas %}
+
+                <tr>
+
+                    <td>{{ aula[0] }}</td>
+                    <td>{{ aula[1] }}</td>
+                    <td>{{ aula[2] }}</td>
+                    <td>{{ aula[3] }}</td>
+                    <td>{{ aula[4] }}</td>
+
+                    <td>
+
+                        <a
+                            href="/editar_aula/{{ aula[0] }}"
+                            class="btn btn-warning btn-sm">
+
+                            Editar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
