@@ -1,0 +1,187 @@
+{% extends "coordinador/base_cor.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Modificar Horario
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label>Docente</label>
+
+                    <select
+                        class="form-control"
+                        name="docente"
+                        required>
+
+                        {% for docente in docentes %}
+
+                        <option
+
+                            value="{{ docente.id_docente }}"
+
+                            {% if docente.id_docente==horario.id_docente %}
+
+                            selected
+
+                            {% endif %}>
+
+                            {{ docente.nombre }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label>Aula</label>
+
+                    <select
+                        class="form-control"
+                        name="aula"
+                        required>
+
+                        {% for aula in aulas %}
+
+                        <option
+
+                            value="{{ aula.id_aula }}"
+
+                            {% if aula.id_aula==horario.id_aula %}
+
+                            selected
+
+                            {% endif %}>
+
+                            {{ aula.aula }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <label>Día</label>
+
+                    <select
+                        class="form-control"
+                        name="dia">
+
+                        <option {% if horario.dia=="Lunes" %}selected{% endif %}>Lunes</option>
+
+                        <option {% if horario.dia=="Martes" %}selected{% endif %}>Martes</option>
+
+                        <option {% if horario.dia=="Miércoles" %}selected{% endif %}>Miércoles</option>
+
+                        <option {% if horario.dia=="Jueves" %}selected{% endif %}>Jueves</option>
+
+                        <option {% if horario.dia=="Viernes" %}selected{% endif %}>Viernes</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label>Hora Inicio</label>
+
+                    <input
+
+                        type="time"
+
+                        class="form-control"
+
+                        name="hora_inicio"
+
+                        value="{{ horario.hora_inicio }}"
+
+                        required>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label>Hora Fin</label>
+
+                    <input
+
+                        type="time"
+
+                        class="form-control"
+
+                        name="hora_fin"
+
+                        value="{{ horario.hora_fin }}"
+
+                        required>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <input
+
+                type="hidden"
+
+                name="cupo"
+
+                value="{{ horario.cupo }}">
+
+            <button
+
+                class="btn btn-success">
+
+                <i class="fas fa-save"></i>
+
+                Guardar Cambios
+
+            </button>
+
+            <a
+
+                href="/modificar_horarios"
+
+                class="btn btn-secondary">
+
+                Cancelar
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

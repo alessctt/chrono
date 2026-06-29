@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="content-header">
+
+    <div class="container-fluid">
+
+        <h1>
+
+            Historial de Cambios
+
+        </h1>
+
+    </div>
+
+</div>
+
+<section class="content">
+
+<div class="container-fluid">
+
+    <!-- ========================= -->
+    <!-- FILTROS -->
+    <!-- ========================= -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3 class="card-title">
+
+                Filtros
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="GET" action="/auditoria">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>Usuario</label>
+
+                        <select
+                            class="form-control"
+                            name="usuario">
+
+                            <option value="">
+
+                                Todos
+
+                            </option>
+
+                            {% for u in usuarios %}
+
+                            <option
+                                value="{{ u.id_usuario }}"
+                                {% if request.args.get('usuario')==u.id_usuario|string %}selected{% endif %}>
+
+                                {{ u.nombre }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Módulo</label>
+
+                        <select
+                            class="form-control"
+                            name="modulo">
+
+                            <option value="">
+
+                                Todos
+
+                            </option>
+
+                            {% for m in modulos %}
+
+                            <option
+                                value="{{ m.modulo }}"
+                                {% if request.args.get('modulo')==m.modulo %}selected{% endif %}>
+
+                                {{ m.modulo }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Acción</label>
+
+                        <select
+                            class="form-control"
+                            name="accion">
+
+                            <option value="">
+
+                                Todas
+
+                            </option>
+
+                            {% for a in acciones %}
+
+                            <option
+                                value="{{ a.accion }}"
+                                {% if request.args.get('accion')==a.accion %}selected{% endif %}>
+
+                                {{ a.accion }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Fecha Inicio</label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="fecha_inicio"
+                            value="{{ request.args.get('fecha_inicio','') }}">
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>Fecha Fin</label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="fecha_fin"
+                            value="{{ request.args.get('fecha_fin','') }}">
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="fas fa-search"></i>
+
+                    Buscar
+
+                </button>
+
+                <a
+                    href="/auditoria"
+                    class="btn btn-secondary">
+
+                    <i class="fas fa-sync-alt"></i>
+
+                    Limpiar
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- TABLA -->
+    <!-- ========================= -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3 class="card-title">
+
+                Historial de Cambios
+
+            </h3>
+
+        </div>
+
+        <div class="card-body table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+
+                        <th>Usuario</th>
+
+                        <th>Módulo</th>
+
+                        <th>Acción</th>
+
+                        <th>Descripción</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for h in historial %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ h.fecha }}
+
+                        </td>
+
+                        <td>
+
+                            {{ h.nombre }}
+
+                        </td>
+
+                        <td>
+
+                            {{ h.modulo }}
+
+                        </td>
+
+                        <td>
+
+                            {{ h.accion }}
+
+                        </td>
+
+                        <td>
+
+                            {{ h.descripcion }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- EXPORTAR -->
+    <!-- ========================= -->
+
+    <div class="text-right">
+
+        <a href="/exportar_excel?usuario={{ request.args.get('usuario','') }}&modulo={{ request.args.get('modulo','') }}&accion={{ request.args.get('accion','') }}&fecha_inicio={{ request.args.get('fecha_inicio','') }}&fecha_fin={{ request.args.get('fecha_fin','') }}"
+
+            class="btn btn-success">
+
+            <i class="fas fa-file-excel"></i>
+
+            Exportar Excel
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+{% endblock %}

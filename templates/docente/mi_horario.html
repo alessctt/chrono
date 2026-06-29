@@ -1,0 +1,83 @@
+{% extends "docente/base_doc.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Mi Horario
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered text-center">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th style="width:120px">
+
+                            Hora
+
+                        </th>
+
+                        <th>Lunes</th>
+
+                        <th>Martes</th>
+
+                        <th>Miércoles</th>
+
+                        <th>Jueves</th>
+
+                        <th>Viernes</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for fila in matriz %}
+
+                    <tr>
+
+                        <td>
+
+                            <strong>{{ fila.hora }}</strong>
+
+                        </td>
+
+                        <td>{{ fila.lunes|safe }}</td>
+
+                        <td>{{ fila.martes|safe }}</td>
+
+                        <td>{{ fila.miercoles|safe }}</td>
+
+                        <td>{{ fila.jueves|safe }}</td>
+
+                        <td>{{ fila.viernes|safe }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Editar Periodo Académico
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-2">
+
+                    <label>Clave</label>
+
+                    <input
+                        type="text"
+                        name="clave"
+                        class="form-control"
+                        value="{{ periodo[1] }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label>Nombre</label>
+
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        value="{{ periodo[2] }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label>Fecha Inicio</label>
+
+                    <input
+                        type="date"
+                        name="fecha_inicio"
+                        class="form-control"
+                        value="{{ periodo[3] }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label>Fecha Fin</label>
+
+                    <input
+                        type="date"
+                        name="fecha_fin"
+                        class="form-control"
+                        value="{{ periodo[4] }}"
+                        required>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="btn btn-primary">
+
+                Guardar Cambios
+
+            </button>
+
+            <a
+                href="/periodos"
+                class="btn btn-secondary">
+
+                Cancelar
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

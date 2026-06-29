@@ -1,0 +1,124 @@
+{% extends "coordinador/base_cor.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Modificar Horarios
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+
+        <table class="table table-bordered table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Periodo</th>
+                    <th>Grupo</th>
+                    <th>Materia</th>
+                    <th>Docente</th>
+                    <th>Aula</th>
+                    <th>Día</th>
+                    <th>Horario</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+{% for horario in horarios %}
+
+<tr>
+
+    <td>{{ horario.periodo }}</td>
+
+    <td>{{ horario.grupo }}</td>
+
+    <td>{{ horario.materia }}</td>
+
+    <td>{{ horario.docente }}</td>
+
+    <td>{{ horario.aula }}</td>
+
+    <td>{{ horario.dia }}</td>
+
+    <td>
+
+        {{ horario.hora_inicio }}
+
+        -
+
+        {{ horario.hora_fin }}
+
+    </td>
+
+    <td>
+
+        {% if horario.estado=="Pendiente" %}
+
+        <span class="badge badge-warning">
+
+            Pendiente
+
+        </span>
+
+        {% elif horario.estado=="Preliminar" %}
+
+        <span class="badge badge-info">
+
+            Preliminar
+
+        </span>
+
+        {% elif horario.estado=="Aprobado" %}
+
+        <span class="badge badge-success">
+
+            Aprobado
+
+        </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        <a
+
+            href="/editar_horario/{{ horario.id_horario }}"
+
+            class="btn btn-warning btn-sm">
+
+            <i class="fas fa-edit"></i>
+
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

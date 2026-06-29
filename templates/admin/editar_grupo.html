@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Editar Grupo
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <label>Clave del Grupo</label>
+
+                    <input
+
+                        type="text"
+
+                        name="clave_grupo"
+
+                        class="form-control"
+
+                        value="{{ grupo.clave_grupo }}"
+
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Semestre</label>
+
+                    <input
+
+                        type="number"
+
+                        name="semestre"
+
+                        class="form-control"
+
+                        min="1"
+
+                        max="9"
+
+                        value="{{ grupo.semestre }}"
+
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Turno</label>
+
+                    <select
+
+                        name="turno"
+
+                        class="form-control">
+
+                        <option value="MATUTINO"
+
+                        {% if grupo.turno=="MATUTINO" %}selected{% endif %}>
+
+                        MATUTINO
+
+                        </option>
+
+                        <option value="VESPERTINO"
+
+                        {% if grupo.turno=="VESPERTINO" %}selected{% endif %}>
+
+                        VESPERTINO
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Cupo Máximo</label>
+
+                    <input
+
+                        type="number"
+
+                        name="cupo_maximo"
+
+                        class="form-control"
+
+                        value="{{ grupo.cupo_maximo }}"
+
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label>Carrera</label>
+
+                    <input
+
+                        type="text"
+
+                        name="carrera"
+
+                        class="form-control"
+
+                        value="{{ grupo.carrera }}"
+
+                        required>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="btn btn-success">
+
+                <i class="fas fa-save"></i>
+
+                Guardar Cambios
+
+            </button>
+
+            <a href="/grupos" class="btn btn-secondary">
+
+                Cancelar
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

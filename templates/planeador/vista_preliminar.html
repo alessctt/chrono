@@ -1,0 +1,193 @@
+{% extends "planeador/base_plan.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Vista Preliminar del Horario
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <label>Periodo Académico</label>
+
+                    <select
+                        class="form-control"
+                        name="periodo"
+                        required>
+
+                        <option value="">Seleccione...</option>
+
+                        {% for periodo in periodos %}
+
+                        <option
+                            value="{{ periodo.id_periodo }}"
+                            {% if periodo.id_periodo == periodo_seleccionado %}selected{% endif %}>
+
+                            {{ periodo.clave }} | {{ periodo.nombre }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <label>Grupo</label>
+
+                    <select
+                        class="form-control"
+                        name="grupo"
+                        required>
+
+                        <option value="">Seleccione...</option>
+
+                        {% for grupo in grupos %}
+
+                        <option
+                            value="{{ grupo.id_grupo }}"
+                            {% if grupo.id_grupo == grupo_seleccionado %}selected{% endif %}>
+
+                            {{ grupo.clave_grupo }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block">
+
+                        <i class="fas fa-search"></i>
+
+                        Mostrar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Matriz de Horarios
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover text-center">
+
+                <thead class="thead-light">
+
+                    <tr>
+
+                        <th style="width:120px">
+
+                            Hora
+
+                        </th>
+
+                        <th>Lunes</th>
+
+                        <th>Martes</th>
+
+                        <th>Miércoles</th>
+
+                        <th>Jueves</th>
+
+                        <th>Viernes</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% if matriz %}
+
+                        {% for fila in matriz %}
+
+                        <tr>
+
+                            <th>
+
+                                {{ fila.hora }}
+
+                            </th>
+
+                            <td>{{ fila.lunes|safe }}</td>
+
+                            <td>{{ fila.martes|safe }}</td>
+
+                            <td>{{ fila.miercoles|safe }}</td>
+
+                            <td>{{ fila.jueves|safe }}</td>
+
+                            <td>{{ fila.viernes|safe }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="6">
+
+                                Seleccione un periodo académico y un grupo para visualizar el horario preliminar.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

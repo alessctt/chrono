@@ -1,0 +1,407 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="content-header">
+
+    <div class="container-fluid">
+
+        <h1>
+
+            Importar Información
+
+        </h1>
+
+    </div>
+
+</div>
+
+<section class="content">
+
+<div class="container-fluid">
+
+<div class="card">
+
+<div class="card-header">
+
+<h3 class="card-title">
+
+Importación de Información
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<form
+    method="POST"
+    action="/importar"
+    enctype="multipart/form-data">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>
+
+Tipo de Información
+
+</label>
+
+<select
+    class="form-control"
+    name="tipo"
+    id="tipo">
+
+<option value="">
+
+Seleccione...
+
+</option>
+
+<option value="materias">
+
+Materias
+
+</option>
+
+<option value="docentes">
+
+Docentes
+
+</option>
+
+<option value="aulas">
+
+Aulas
+
+</option>
+
+</select>
+
+<div class="mt-2">
+
+<a
+id="btnPlantilla"
+href="#"
+class="btn btn-secondary btn-sm"
+download>
+
+<i class="fas fa-download"></i>
+
+Descargar Plantilla
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<label>
+
+Archivo Excel
+
+</label>
+
+<input
+type="file"
+class="form-control"
+name="archivo"
+accept=".xlsx">
+
+</div>
+
+</div>
+
+<br>
+
+<button
+type="submit"
+class="btn btn-primary">
+
+<i class="fas fa-search"></i>
+
+Analizar Archivo
+
+</button>
+
+<button
+type="button"
+class="btn btn-success"
+disabled>
+
+<i class="fas fa-file-import"></i>
+
+Importar Información
+
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+disabled>
+
+<i class="fas fa-download"></i>
+
+Descargar Reporte
+
+</button>
+
+</form>
+
+{% if mensaje %}
+
+<br>
+
+{% if error %}
+
+<div class="alert alert-danger">
+
+{{ mensaje }}
+
+</div>
+
+{% else %}
+
+<div class="alert alert-success">
+
+{{ mensaje }}
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+<hr>
+
+<h4>
+
+Resultado del Análisis
+
+</h4>
+
+<div class="row">
+
+<div class="col-md-3">
+
+<div class="small-box bg-info">
+
+<div class="inner">
+
+<h3>
+
+{{ encontrados|default(0) }}
+
+</h3>
+
+<p>
+
+Registros encontrados
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="small-box bg-success">
+
+<div class="inner">
+
+<h3>
+
+{{ validos|default(0) }}
+
+</h3>
+
+<p>
+
+Registros válidos
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="small-box bg-danger">
+
+<div class="inner">
+
+<h3>
+
+{{ errores|default(0) }}
+
+</h3>
+
+<p>
+
+Registros con errores
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="small-box bg-warning">
+
+<div class="inner">
+
+<h3>
+
+{{ importados|default(0) }}
+
+</h3>
+
+<p>
+
+Registros importados
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<h4>
+
+Detalle de Errores
+
+</h4>
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover">
+
+<thead>
+
+<tr>
+
+<th width="120">
+
+Fila
+
+</th>
+
+<th>
+
+Descripción del Error
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if lista_errores %}
+
+{% for e in lista_errores %}
+
+<tr>
+
+<td>
+
+{{ e.fila }}
+
+</td>
+
+<td>
+
+{{ e.error }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="2" class="text-center">
+
+No existen errores para mostrar.
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+const selector = document.getElementById("tipo");
+
+const boton = document.getElementById("btnPlantilla");
+
+selector.addEventListener("change", function(){
+
+    if(this.value=="materias"){
+
+        boton.href="/static/plantillas/plantilla_materias.xlsx";
+
+    }
+
+    else if(this.value=="docentes"){
+
+        boton.href="/static/plantillas/plantilla_docentes.xlsx";
+
+    }
+
+    else if(this.value=="aulas"){
+
+        boton.href="/static/plantillas/plantilla_aulas.xlsx";
+
+    }
+
+    else{
+
+        boton.href="#";
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

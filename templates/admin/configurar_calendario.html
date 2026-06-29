@@ -1,0 +1,432 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="card card-primary">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Configuración Académica
+
+        </h3>
+
+    </div>
+
+    <form method="POST">
+
+        <div class="card-body">
+
+            <!-- ============================= -->
+            <!-- INFORMACIÓN DEL PERIODO -->
+            <!-- ============================= -->
+
+            <div class="card">
+
+                <div class="card-header bg-light">
+
+                    <h5>
+
+                        Información General
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label>Periodo Académico</label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ periodo['nombre'] }}"
+                                readonly>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label>Clave</label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ periodo['clave'] }}"
+                                readonly>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label>Estado</label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{{ periodo['estado'] }}"
+                                readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- ============================= -->
+            <!-- TURNOS -->
+            <!-- ============================= -->
+
+            <div class="card">
+
+                <div class="card-header bg-light">
+
+                    <h5>
+
+                        Configuración de Turnos
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <label>Inicio Matutino</label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="hora_inicio_matutino"
+                                value="{{ calendario['hora_inicio_matutino'] if calendario else '07:00' }}">
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label>Fin Matutino</label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="hora_fin_matutino"
+                                value="{{ calendario['hora_fin_matutino'] if calendario else '15:00' }}">
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label>Inicio Vespertino</label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="hora_inicio_vespertino"
+                                value="{{ calendario['hora_inicio_vespertino'] if calendario else '14:00' }}">
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label>Fin Vespertino</label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                name="hora_fin_vespertino"
+                                value="{{ calendario['hora_fin_vespertino'] if calendario else '22:00' }}">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- ============================= -->
+            <!-- BLOQUES -->
+            <!-- ============================= -->
+
+            <div class="card">
+
+                <div class="card-header bg-light">
+
+                    <h5>
+
+                        Configuración de Bloques
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <label>
+
+                                Duración del bloque (minutos)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="duracion_bloque"
+                                value="{{ calendario['duracion_bloque'] if calendario else '60' }}">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- ============================= -->
+            <!-- DÍAS HÁBILES -->
+            <!-- ============================= -->
+
+            <div class="card">
+
+                <div class="card-header bg-light">
+
+                    <h5>
+
+                        Días Hábiles
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="lunes"
+
+                            {% if calendario and calendario['lunes'] %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label class="form-check-label">
+
+                        Lunes
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="martes"
+
+                            {% if calendario and calendario['martes'] %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label class="form-check-label">
+
+                            Martes
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="miercoles"
+
+                            {% if calendario and calendario['miercoles'] %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label class="form-check-label">
+
+                            Miércoles
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="jueves"
+
+                            {% if calendario and calendario['jueves'] %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label class="form-check-label">
+
+                            Jueves
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="viernes"
+
+                            {% if calendario and calendario['viernes'] %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <label class="form-check-label">
+
+                            Viernes
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- ============================= -->
+            <!-- AJUSTES -->
+            <!-- ============================= -->
+
+            <div class="card">
+
+                <div class="card-header bg-light">
+
+                    <h5>
+
+                        Periodo de Ajustes
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <label>
+
+                                Inicio
+
+                            </label>
+
+                            <input
+                                type="date"
+                                name="fecha_inicio_ajustes"
+                                class="form-control"
+                                value="{{ ajustes['fecha_inicio'] if ajustes else '' }}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label>
+
+                                Fin
+
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="fecha_fin_ajustes"
+                                value="{{ ajustes['fecha_fin'] if ajustes else '' }}">
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="permitir"
+                            {% if calendario and calendario['permitir_modificaciones_extra'] %}
+                            checked
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Permitir modificaciones extraordinarias
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <button class="btn btn-success">
+
+                <i class="fas fa-save"></i>
+
+                Guardar Configuración
+
+            </button>
+
+            <a
+                href="/configuracion_academica"
+                class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

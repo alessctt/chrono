@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="content-header">
+
+    <div class="container-fluid">
+
+        <h1>
+
+            Reportes y Auditoría
+
+        </h1>
+
+    </div>
+
+</div>
+
+<section class="content">
+
+<div class="container-fluid">
+
+<div class="row">
+
+    <!-- REPORTES -->
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <i class="fas fa-chart-bar fa-4x text-primary mb-3"></i>
+
+                <h3>
+
+                    Reportes
+
+                </h3>
+
+                <a href="/reportes_sistema"
+                   class="btn btn-primary">
+
+                    Ingresar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AUDITORÍA -->
+
+    <div class="col-md-6">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <i class="fas fa-history fa-4x text-success mb-3"></i>
+
+                <h3>
+
+                    Auditoría
+
+                </h3>
+
+                <a href="/auditoria"
+                   class="btn btn-success">
+
+                    Ingresar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- IMPORTAR INFORMACIÓN -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <i class="fas fa-file-import fa-4x text-warning mb-3"></i>
+
+                <h3>
+
+                    Importar Información
+
+                </h3>
+                <a
+                    href="/importar"
+                    class="btn btn-warning">
+
+                    Ingresar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

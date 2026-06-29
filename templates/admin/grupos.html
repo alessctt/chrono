@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Gestión de Grupos
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <label>Clave del Grupo</label>
+
+                    <input
+                        type="text"
+                        name="clave_grupo"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Semestre</label>
+
+                    <input
+                        type="number"
+                        name="semestre"
+                        class="form-control"
+                        min="1"
+                        max="9"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Turno</label>
+
+                    <select
+                        name="turno"
+                        class="form-control">
+
+                        <option>MATUTINO</option>
+                        <option>VESPERTINO</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <label>Cupo Máximo</label>
+
+                    <input
+                        type="number"
+                        name="cupo_maximo"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <label>Carrera</label>
+
+                    <input
+                        type="text"
+                        name="carrera"
+                        class="form-control"
+                        required>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button
+                class="btn btn-primary">
+
+                <i class="fas fa-save"></i>
+
+                Registrar Grupo
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Grupos Registrados
+
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Clave</th>
+                    <th>Semestre</th>
+                    <th>Turno</th>
+                    <th>Cupo</th>
+                    <th>Carrera</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for grupo in grupos %}
+
+                <tr>
+
+                    <td>{{ grupo.clave_grupo }}</td>
+
+                    <td>{{ grupo.semestre }}</td>
+
+                    <td>{{ grupo.turno }}</td>
+
+                    <td>{{ grupo.cupo_maximo }}</td>
+
+                    <td>{{ grupo.carrera }}</td>
+
+                    <td>
+
+                        {% if grupo.activo == 1 %}
+
+                        <span class="badge badge-success">
+
+                        Activo
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge badge-danger">
+
+                        Inactivo
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="/editar_grupo/{{ grupo.id_grupo }}"
+                            class="btn btn-warning btn-sm">
+
+                            <i class="fas fa-edit"></i>
+
+                        </a>
+
+                        {% if grupo.activo == 1 %}
+
+                        <a
+                            href="/cambiar_estado_grupo/{{ grupo.id_grupo }}"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿Desea desactivar este grupo?')">
+
+                            <i class="fas fa-ban"></i>
+
+                        </a>
+
+                        {% else %}
+
+                        <a
+                            href="/cambiar_estado_grupo/{{ grupo.id_grupo }}"
+                            class="btn btn-success btn-sm"
+                            onclick="return confirm('¿Desea activar este grupo?')">
+
+                            <i class="fas fa-check"></i>
+
+                        </a>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

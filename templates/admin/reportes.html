@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<form method="GET" action="/reportes_sistema">
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <label>
+
+            Tipo de reporte
+
+        </label>
+
+        <select
+            class="form-control"
+            name="tipo">
+
+            <option value="">
+
+                Seleccione...
+
+            </option>
+
+            <option value="usuarios"
+            {% if tipo=="usuarios" %}selected{% endif %}>
+
+                Usuarios
+
+            </option>
+
+            <option value="docentes"
+            {% if tipo=="docentes" %}selected{% endif %}>
+
+                Docentes
+
+            </option>
+
+            <option value="materias"
+            {% if tipo=="materias" %}selected{% endif %}>
+
+                Materias
+
+            </option>
+
+            <option value="aulas"
+            {% if tipo=="aulas" %}selected{% endif %}>
+
+                Aulas
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<br>
+
+<button
+class="btn btn-primary">
+
+<i class="fas fa-search"></i>
+
+Consultar
+
+</button>
+
+</form>
+
+<!-- ============================= -->
+<!-- RESULTADOS -->
+<!-- ============================= -->
+
+<div class="card mt-4">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Resultados
+
+        </h3>
+
+    </div>
+
+    <div class="card-body table-responsive">
+
+        {% if tipo == "" %}
+
+            <div class="alert alert-info">
+
+                Seleccione un tipo de reporte y presione
+                <strong>Consultar</strong>.
+
+            </div>
+
+        {% endif %}
+
+{% if tipo=="usuarios" %}
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for u in datos %}
+
+        <tr>
+
+            <td>{{ u.nombre }}</td>
+
+            <td>{{ u.correo }}</td>
+
+            <td>{{ u.rol }}</td>
+
+            <td>
+
+                {% if u.activo %}
+
+                    Activo
+
+                {% else %}
+
+                    Inactivo
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+{% if tipo=="docentes" %}
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th>No. Empleado</th>
+
+            <th>Nombre</th>
+
+            <th>Turno</th>
+
+            <th>Estado</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for d in datos %}
+
+        <tr>
+
+            <td>{{ d.numero_empleado }}</td>
+
+            <td>{{ d.nombre }}</td>
+
+            <td>{{ d.turno }}</td>
+
+            <td>
+
+                {% if d.activo %}
+
+                    Activo
+
+                {% else %}
+
+                    Inactivo
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+{% if tipo=="materias" %}
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th>Clave</th>
+
+            <th>Materia</th>
+
+            <th>Horas T.</th>
+
+            <th>Horas P.</th>
+
+            <th>Semestre</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for m in datos %}
+
+        <tr>
+
+            <td>{{ m.clave }}</td>
+
+            <td>{{ m.nombre }}</td>
+
+            <td>{{ m.horas_teoricas }}</td>
+
+            <td>{{ m.horas_practicas }}</td>
+
+            <td>{{ m.semestre }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+{% if tipo=="aulas" %}
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th>Edificio</th>
+
+            <th>Aula</th>
+
+            <th>Capacidad</th>
+
+            <th>Tipo</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for a in datos %}
+
+        <tr>
+
+            <td>{{ a.edificio }}</td>
+
+            <td>{{ a.aula }}</td>
+
+            <td>{{ a.capacidad }}</td>
+
+            <td>{{ a.tipo }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+    </div>
+
+</div>
+{% endblock %}

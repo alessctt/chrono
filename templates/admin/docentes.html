@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block contenido %}
 
@@ -7,22 +7,47 @@
     <div class="card-header">
 
         <h3 class="card-title">
+
             Gestión de Docentes
+
         </h3>
 
     </div>
 
-        <hr>
+    <div class="card-body">
 
-        <table class="table table-bordered table-striped">
+        <div class="row mb-3">
+
+            <div class="col-md-5">
+
+                <input
+                    type="text"
+                    id="buscarDocente"
+                    class="form-control"
+                    placeholder="Buscar docente...">
+
+            </div>
+
+        </div>
+
+        <table class="table table-bordered table-hover" id="tablaDocentes">
 
             <thead>
 
                 <tr>
-                     <th>ID</th>
-                    <th>Nombre</th>
+
+                    <th>No. Empleado</th>
+
+                    <th>Docente</th>
+
                     <th>Correo</th>
-                    <th>Estado</th>
+
+                    <th>Turno</th>
+
+                    <th>Perfil</th>
+
+                    <th width="130">Acciones</th>
+
                 </tr>
 
             </thead>
@@ -31,29 +56,97 @@
 
                 {% for docente in docentes %}
 
-                    <tr>
+                <tr>
 
-                        <td>{{ docente[0] }}</td>
+                    <td>
 
-                        <td>{{ docente[1] }}</td>
+                        {% if docente.numero_empleado %}
 
-                        <td>{{ docente[2] }}</td>
+                            {{ docente.numero_empleado }}
 
-                        <td>
+                        {% else %}
 
-                            {% if docente[3] == 1 %}
-                                <span class="badge badge-success">
-                                    Activo
-                                </span>
-                            {% else %}
-                                <span class="badge badge-danger">
-                                    Inactivo
-                                </span>
-                            {% endif %}
+                            <span class="text-muted">
 
-                        </td>
+                                Pendiente
 
-                    </tr>
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ docente.nombre }}
+
+                    </td>
+
+                    <td>
+
+                        {{ docente.correo }}
+
+                    </td>
+
+                    <td>
+
+                        {{ docente.turno }}
+
+                    </td>
+
+                    <td>
+
+                        {% if docente.numero_empleado %}
+
+                            <span class="badge badge-success">
+
+                                Completo
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge badge-warning">
+
+                                Pendiente
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if docente.numero_empleado %}
+
+                        <a
+                            href="/editar_docente/{{ docente.id_docente }}"
+                            class="btn btn-warning btn-sm">
+
+                            <i class="fas fa-edit"></i>
+
+                            Editar
+
+                        </a>
+
+                        {% else %}
+
+                        <a
+                            href="/editar_docente/{{ docente.id_docente }}"
+                            class="btn btn-primary btn-sm">
+
+                            <i class="fas fa-user-edit"></i>
+
+                            Completar
+
+                        </a>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
 
                 {% endfor %}
 
@@ -64,5 +157,25 @@
     </div>
 
 </div>
+
+<script>
+
+document.getElementById("buscarDocente").addEventListener("keyup", function(){
+
+    let texto = this.value.toLowerCase();
+
+    let filas = document.querySelectorAll("#tablaDocentes tbody tr");
+
+    filas.forEach(function(fila){
+
+        let contenido = fila.innerText.toLowerCase();
+
+        fila.style.display = contenido.includes(texto) ? "" : "none";
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title">
+
+            Información del Docente
+
+        </h3>
+
+    </div>
+
+    <form method="POST">
+
+        <div class="card-body">
+
+            <!-- Información General -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        Información General
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label>Nombre</label>
+
+                            <input
+                                class="form-control"
+                                value="{{ docente.nombre }}"
+                                readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Correo</label>
+
+                            <input
+                                class="form-control"
+                                value="{{ docente.correo }}"
+                                readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- Información Académica -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        Información Académica
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label>Número de empleado</label>
+
+                            <input
+                                type="text"
+                                name="numero_empleado"
+                                class="form-control"
+                                value="{{ docente.numero_empleado or '' }}"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Turno</label>
+
+                            <select
+                                name="turno"
+                                class="form-control">
+
+                                <option value="Matutino"
+                                {% if docente.turno=="Matutino" %}selected{% endif %}>
+                                Matutino
+                                </option>
+
+                                <option value="Vespertino"
+                                {% if docente.turno=="Vespertino" %}selected{% endif %}>
+                                Vespertino
+                                </option>
+
+                                <option value="Ambos"
+                                {% if docente.turno=="Ambos" %}selected{% endif %}>
+                                Ambos
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        Disponibilidad
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="lunes"
+
+                            {% if disponibilidad %}
+
+                                {% if disponibilidad.lunes %}
+                                    checked
+                                {% endif %}
+
+                            {% else %}
+
+                                checked
+
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Lunes
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="martes"
+
+                            {% if disponibilidad %}
+
+                                {% if disponibilidad.martes %}
+                                    checked
+                                {% endif %}
+
+                            {% else %}
+
+                                checked
+
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Martes
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="miercoles"
+
+                            {% if disponibilidad %}
+
+                                {% if disponibilidad.miercoles %}
+                                    checked
+                                {% endif %}
+
+                            {% else %}
+
+                                checked
+
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Miércoles
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="jueves"
+
+                            {% if disponibilidad %}
+
+                                {% if disponibilidad.jueves %}
+                                    checked
+                                {% endif %}
+
+                            {% else %}
+
+                                checked
+
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Jueves
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-check">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="viernes"
+
+                            {% if disponibilidad %}
+
+                                {% if disponibilidad.viernes %}
+                                    checked
+                                {% endif %}
+
+                            {% else %}
+
+                                checked
+
+                            {% endif %}>
+
+                        <label class="form-check-label">
+
+                            Viernes
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <!-- Estado -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+
+                        Estado
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <select
+                        name="activo"
+                        class="form-control col-md-3">
+
+                        <option value="1"
+                        {% if docente.activo==1 %}selected{% endif %}>
+                        Activo
+                        </option>
+
+                        <option value="0"
+                        {% if docente.activo==0 %}selected{% endif %}>
+                        Inactivo
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button
+                class="btn btn-success">
+
+                <i class="fas fa-save"></i>
+
+                Guardar Cambios
+
+            </button>
+
+            <a
+                href="/docentes"
+                class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
